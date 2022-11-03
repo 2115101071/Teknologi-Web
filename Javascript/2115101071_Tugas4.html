@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<body style="background-color: rgb(116, 132, 204)">
+    <h3>SELAMAT DATANG DI WEB</h3>
+    <h2>MENGHITUNG LUAS PERMUKAAN</h2>
+
+<form action=" formulir.php" method="post" onSubmit="return ValidasiForm()" name="FormReg">
+        <table>
+            <tr style="background">
+                <td>Nama</td>
+                <td>:</td>
+                <td><input type="text" name="nama" value="" placeholder="Tulisakan Nama Anda" />
+    <br/>
+    
+                <small style="color: red" id="err_nama"></small>
+            </td>
+        </tr>
+        <tr>
+            <td>NIM</td>
+            <td>:</td>
+            <td> <input type="text" name="nim" placeholder="Tulisakan NIM Anda" /><br/>
+                <small style="color: red" id="err_nim"></small>
+            </td>
+        </tr>
+        <tr>
+            <td>Pilih Bangun Ruang</td>
+            <td>:</td>
+            <td>
+            <input type="radio" name="bangun" value="Balok" onclick="balok()" checked /> Balok
+            <input type="radio" name="bangun" value="Tabung" onclick="tabung()" /> Tabung
+            <input type="radio" name="bangun" value="Prisma Segitiga" onclick="prismasegitiga()" /> Prisma Segitiga
+            <br/>
+                <small style="color: red" id="err_jenis_kelamin"></small>
+            </td>
+        </tr>
+        <tr>
+            <td>Volume Bangun Ruang</td>
+            <td>:</td>
+            <td id="nama_bangun">Balok</td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <hr/> </td>
+        </tr>
+        <tr>
+            <td id="par1">Panjang</td>
+            <td>:</td>
+            <td><input type="number" name="par1" value="" onkeyup="hitung()" placeholder="Hanya Angka" /></td>
+        </tr>
+        <tr>
+            <td id="par2">Lebar</td>
+            <td>:</td>
+            <td><input type="number" name="par2" value="" onkeyup="hitung()" placeholder="Hanya Angka" /></td>
+        </tr>
+        <tr>
+            <td id="par3">Tinggi</td>
+            <td>:</td>
+            <td><input type="number" name="par3" value="" onkeyup="hitung()" placeholder="Hanya Angka" /></td>
+        </tr>
+        <tr>
+            <td>Luas Permukaan</td>
+            <td>:</td>
+            <td><input type="number" name="hasil" value="" readonly /><br/>
+                <small style="color: red" id="err_hasil"></small></td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <hr/> </td>
+        </tr>
+        <tr>
+            <td colspan="3" align="right"><button> Simpan</button> </td>
+        </tr>
+     </table>
+    </form>
+    
+    </body>
+    
+<script type="text/javascript">
+    function ValidasiForm() {
+        if (document.FormReg.nama.value == "") {
+            document.getElementById("err_nama").innerHTML = "Nama Harus Diisi";
+            return false;
+        } else {
+            document.getElementById("err_nama").innerHTML = "";
+        }
+        if (document.FormReg.nim.value == "") {
+            document.getElementById("err_nim").innerHTML = "Nim Harus Diisi";
+            return false;
+        } else {
+        document.getElementById("err_nim").innerHTML = "";
+        }
+        if (document.FormReg.hasil.value == "") {
+            document.getElementById("err_hasil").innerHTML = "Silakan Isikan Parameter";
+            return false;
+        } else {
+        document.getElementById("err_hasil").innerHTML = "";
+        }
+    }
+    function balok() {
+        document.getElementById("nama_bangun").innerHTML = "Balok";
+        document.getElementById("par1").innerHTML = "Panjang";
+        document.getElementById("par2").innerHTML = "Lebar";
+        document.getElementById("par3").innerHTML = "Tinggi";
+        hitung();
+    }
+    function tabung() {
+        document.getElementById("nama_bangun").innerHTML = "Tabung";
+        document.getElementById("par1").innerHTML = "Jari Jari";
+        document.getElementById("par2").innerHTML = "Tinggi";
+        document.getElementById("par3").innerHTML = "pi";
+        hitung();
+    }
+    function prismasegitiga() {
+        document.getElementById("nama_bangun").innerHTML = "Prisma Segitiga";
+        document.getElementById("par1").innerHTML = "Keliling Alas";
+        document.getElementById("par2").innerHTML = "Tinggi";
+        document.getElementById("par3").innerHTML = "Luas Alas Segitiga";
+        hitung();
+    }
+    function bola(){
+        document.getElementById("nama_bangun").innerHTML = "Bola";
+        document.getElementById("par1").innerHTML = "Keliling Alas";
+        document.getElementById("par2").innerHTML = "Tinggi";
+        document.getElementById("par3").innerHTML = "Luas Alas Segitiga";
+        hitung();
+    }
+    function hitung() {
+        var hasil = 0;
+        var par1 = parseFloat(document.FormReg.par1.value);
+        var par2 = parseFloat(document.FormReg.par2.value);
+        var par3 = parseFloat(document.FormReg.par3.value);
+        switch (document.FormReg.bangun.value) {
+            case "Balok":
+                hasil = 2 * (par1 * par2 + par1 * par3 + par2 * par3);
+                break;
+            case "Tabung":
+                hasil = 2 * par3 * par1 * (par1 + par2);
+                break;
+            case "Prisma Segitiga":
+                hasil = par1 * par2 + 2 * par3;
+                break;
+            case "Bola"
+        }           
+        //menampilkan hasilnya pada text hasil menggunakan DOM
+        document.FormReg.hasil.value = hasil;
+    }
+</script>
+</html>
